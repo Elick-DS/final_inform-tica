@@ -109,11 +109,13 @@ def ingresar_ubicacion():
 
 def menu_principal(code):
     while True:
+        print("--------------------------------------------------")
         print("Menú Principal")
         print("1. Gestionar información equipos")
         print("2. Gestionar información responsables")
         print("3. Gestionar información ubicaciones")
         print("4. Salir")
+        print("--------------------------------------------------")
 
         opcion = input("Selecciona una opción: ")
 
@@ -132,6 +134,7 @@ def menu_principal(code):
 
 def menu_equipos(code):
     while True:
+        print("--------------------------------------------------")
         print("Menú equipos")
         print("1. Ingresar un nuevo equipo en forma manual")
         print("2. Ingresar un nuevo equipo en forma automática")
@@ -140,6 +143,7 @@ def menu_equipos(code):
         print("5. Ver la información de todos los equipos almacenados")
         print("6. Eliminar un equipo (por número de activo)")
         print("7. Volver al menú principal")
+        print("--------------------------------------------------")
 
         opcion = input("Selecciona una opción: ")
 
@@ -166,6 +170,7 @@ def menu_equipos(code):
 
 def menu_ubicaciones():
     while True:
+     print("--------------------------------------------------")
      print("Menú Ubicaciones")
      print("1. Ingresar nueva ubicación")
      print("2. Actualizar información de una ubicación")
@@ -173,6 +178,7 @@ def menu_ubicaciones():
      print("4. Ver información de todas las ubicaciones")
      print("5. Eliminar una ubicación")
      print("6. Volver al menú principal")
+     print("--------------------------------------------------")
     
      opcion = input("Selecciona una opción: ")
 
