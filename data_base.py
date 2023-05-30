@@ -10,7 +10,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    print("CARGANDO.")
 except Exception as e:
     print(e)
 
@@ -65,10 +65,12 @@ def ingresar_equipos_automaticamente(code):
 
 
 def actualizar_equipo():
+     print("--------------------------------------------------")
      numero_activo = input("Ingrese el número de activo del equipo a actualizar: ")
- 
+     print("--------------------------------------------------")
      equipo = mycol.find_one({"numero_activo": numero_activo})
      if equipo:
+         print("--------------------------------------------------")
          nuevo_nombre = input("Ingrese el nuevo nombre del equipo: ")
          nuevo_marca = input("Ingrese la nueva marca: ")
          while True:
@@ -79,7 +81,7 @@ def actualizar_equipo():
                 break
             else:
                 print("La marca del equipo no puede estar vacío, no puede contener caracteres especiales. Inténtelo nuevamente.")
-     
+         print("--------------------------------------------------")
          nuevo_equipo = {
             "$set": {
                 "nombre_equipo": nuevo_nombre,
@@ -95,7 +97,9 @@ def actualizar_equipo():
 
 
 def ver_equipos():
+    print("--------------------------------------------------")
     print("Ver Equipos")
+    print("--------------------------------------------------")
 
     try:
         client = MongoClient(uri, server_api=ServerApi('1'))

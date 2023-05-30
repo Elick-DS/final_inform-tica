@@ -13,7 +13,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    print("CARGANDO....")
 except Exception as e:
     print(e)
 
@@ -103,7 +103,9 @@ def eliminar_equipo():
         else:
             print("El número de activo no puede estar vacío, no puede contener caracteres especiales y no puede tener más de 4 caracteres. Inténtelo nuevamente.")
     delete_result = mycol.delete_many({"numero_activo": numero_activo})
+    print("--------------------------------------------------")
     print(f"Se eliminaron {delete_result.deleted_count} documentos con el número de activo {numero_activo}.")
+    print("--------------------------------------------------")
 
 
 

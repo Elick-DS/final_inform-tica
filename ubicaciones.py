@@ -1,6 +1,7 @@
 
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+import random
 
 uri = "mongodb+srv://informatica1:bio123@clusterinfo1.vzk1bse.mongodb.net/?retryWrites=true&w=majority"
 
@@ -10,7 +11,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    print("CARGANDO...")
 except Exception as e:
     print(e)
 
@@ -23,9 +24,17 @@ def ingresar_ubicacion():
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client.informatica1
     ubicaciones_collection = db.ubicaciones  
+
+    codigo_ubicacion = str(random.randint(100, 999))
+    print("--------------------------------------------------")
+    print(f"El código de ubicación asignado es: {codigo_ubicacion}")
     
-    codigo = input("Ingresa el código de ubicación: ")
-    nombre = input("Ingresa el nombre de la ubicación: ")
+    while True:
+        nombre = input("Ingresa el nombre de la ubicación: ")
+        if nombre.strip() and nombre.isalpha():
+            break
+        else:
+            print("El nombre de la ubicación no puede estar vacío y no puede contener caracteres especiales. Inténtelo nuevamente.")
     while True:
         while True:
             bloque = input("Ingrese el bloque en el que se encuentra el dispositivo (1-5): ")
@@ -43,10 +52,18 @@ def ingresar_ubicacion():
 
         bp = f"B{bloque}P{piso}"
         break
-    telefono = input("Ingresa el teléfono de la ubicación: ")
+    
+    while True:
+        telefono = input("Ingresa el teléfono de la ubicación: ")
+        if telefono.strip() and telefono.isalnum() and 8 <= int(piso) <= 10:
+            break
+        else:
+            print("--------------------------------------------------")
+            print("El número de teléfono no puede estar vacío, no puede contener caracteres especiales y no puede tener menos de 8 o más de 10 caracteres. Inténtelo nuevamente.")
+    print("--------------------------------------------------")
     
     ubicacion = {
-        "codigo": codigo,
+        "codigo": codigo_ubicacion,
         "nombre": nombre,
         "bp": bp,
         "telefono": telefono
@@ -54,16 +71,20 @@ def ingresar_ubicacion():
     
     try:
         ubicaciones_collection.insert_one(ubicacion)
+        print("--------------------------------------------------")
         print("Ubicación ingresada de forma satisfactoria.")
+        print("--------------------------------------------------")
     except Exception as e:
+        print("--------------------------------------------------")
         print(f"Ha ocurrido un error al ingresar la ubicación: {str(e)}")
+        print("--------------------------------------------------")
 
 
 def actualizar_ubicacion():
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client.informatica1
     ubicaciones_collection = db.ubicaciones  
-    
+    print("--------------------------------------------------")
     codigo = input("Ingresa el código de ubicación a actualizar: ")
     nombre = input("Ingresa el nuevo nombre de la ubicación: ")
     while True:
@@ -84,13 +105,16 @@ def actualizar_ubicacion():
         bp = f"B{bloque}P{piso}"
         break
     telefono = input("Ingresa el nuevo teléfono de la ubicación: ")
+    print("--------------------------------------------------")
     
     try:
         ubicaciones_collection.update_one(
             {"codigo": codigo},
             {"$set": {"nombre": nombre, "bp": bp, "telefono": telefono}}
         )
+        print("--------------------------------------------------")
         print("La ubicación ha sido actualizada.")
+        print("--------------------------------------------------")
     except Exception as e:
         print(f"Ha ocurrido un error al actualizar la ubicación: {str(e)}")
 
@@ -100,8 +124,9 @@ def buscar_ubicacion():
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client.informatica1
     ubicaciones_collection = db.ubicaciones  
-    
+    print("--------------------------------------------------")
     codigo = input("Ingresa el código de ubicación a buscar: ")
+    print("--------------------------------------------------")
     
     ubicacion = ubicaciones_collection.find_one({"codigo": codigo})
     
@@ -114,7 +139,9 @@ def buscar_ubicacion():
         print("telefono:", ubicacion["telefono"])
         print("--------------------------------------------------")
     else:
+        print("--------------------------------------------------")
         print("No se pudo encontrar ninguna ubicación con el código brindado.")
+        print("--------------------------------------------------")
 
 
 
@@ -144,8 +171,9 @@ def eliminar_ubicacion():
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client.informatica1
     ubicaciones_collection = db.ubicaciones  
-    
+    print("--------------------------------------------------")
     codigo = input("Ingresa el código de ubicación a eliminar: ")
+    print("--------------------------------------------------")
     
     try:
         ubicaciones_collection.delete_one({"codigo": codigo})

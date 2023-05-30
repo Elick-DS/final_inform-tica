@@ -21,7 +21,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    print("CARGANDO.....")
 except Exception as e:
     print(e)
 
@@ -30,11 +30,14 @@ myres = mydb["responsables"]
 
 
 def bienvenida():
+    print("--------------------------------------------------")
     print("BIENVENIDO A NUESTRO SISTEMA DE CONTROL DE INVENTARIOS MÉDICOS")
 
     while True:
         while True:
+            print("--------------------------------------------------")
             opcion = input("1.Iniciar sesión\n2.Crearse una cuenta\n3.Salir\nOpción:")
+            print("--------------------------------------------------")
             if opcion.isnumeric() and opcion == "1":
                 break
             elif opcion.isnumeric() and opcion == "2":
@@ -57,6 +60,7 @@ def bienvenida():
                 break
             
             if not usuario_encontrado:
+                print("--------------------------------------------------")
                 print("El código de responsable no se encuentra en la base de datos, creese una cuenta o verifique que ha escrito bien su código.")
 
 
