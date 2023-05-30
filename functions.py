@@ -122,7 +122,7 @@ def menu_principal(code):
         elif opcion == "2":
             gestionar_responsables()
         elif opcion == "3":
-            menu_ubicaciones()
+            menu_ubicaciones(code)
         elif opcion == "4":
             print("¡Gracias por utilizar el sistema!")
             exit()
@@ -186,9 +186,9 @@ def menu_ubicaciones(code):
      elif opcion == "3":
          buscar_ubicacion()
      elif opcion == "4":
-         ver_ubicaciones
+         ver_ubicaciones()
      elif opcion == "5":
-         eliminar_ubicacion
+         eliminar_ubicacion()
      elif opcion == "6":
         break
      else:

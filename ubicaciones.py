@@ -106,11 +106,13 @@ def buscar_ubicacion():
     ubicacion = ubicaciones_collection.find_one({"codigo": codigo})
     
     if ubicacion:
+        print("--------------------------------------------------")
         print("Ubicación encontrada:")
         print("codigo:", ubicacion["codigo"])
         print("nombre:", ubicacion["nombre"])
         print("bp:", ubicacion["bp"])
         print("telefono:", ubicacion["telefono"])
+        print("--------------------------------------------------")
     else:
         print("No se pudo encontrar ninguna ubicación con el código brindado.")
 
@@ -126,10 +128,12 @@ def ver_ubicaciones():
     
     print("Ubicaciones:")
     for ubicacion in ubicaciones:
+        print("--------------------------------------------------")
         print("codigo:", ubicacion["codigo"])
         print("nombre:", ubicacion["nombre"])
-        print("bp", ubicacion["bp"])
+        print("Bloque y piso", ubicacion["bp"])
         print("telefono:", ubicacion["telefono"])
+        print("--------------------------------------------------")
         
 
 
@@ -145,7 +149,9 @@ def eliminar_ubicacion():
     
     try:
         ubicaciones_collection.delete_one({"codigo": codigo})
+        print("--------------------------------------------------")
         print("Ubicación eliminada de forma satisfactoria.")
+        print("--------------------------------------------------")
     except Exception as e:
         print(f"Ha ocurrido un error al eliminar la ubicación: {str(e)}")
 
