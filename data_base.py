@@ -18,6 +18,7 @@ mydb = client["informatica1"]
 mycol = mydb["Equipos"]
 myres = mydb["responsables"]
 
+
 ultima_posicion = 0
 def ingresar_equipos_automaticamente():
     global ultima_posicion

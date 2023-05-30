@@ -61,7 +61,10 @@ def ingresar_equipo_manual(code):
 
 def buscar_equipo():
     code = input("Ingresa el número de activo: ")
+    equipos_encontrados = 0
+    
     for y in mycol.find({'numero_activo': code}):
+        equipos_encontrados += 1
         print(f"+------------------------------------------+\n"
               f"| Serial             | {y['serial']:<10}          |\n"
               f"|------------------------------------------|\n"
@@ -75,6 +78,9 @@ def buscar_equipo():
               f"|------------------------------------------|\n"
               f"| Codigo responsable | {y['codigo_responsable']:<10}          |\n"
               f"|------------------------------------------|\n")
+    
+    if equipos_encontrados == 0:
+        print("Error, no se encontró ningún equipo.")
 
 def eliminar_equipo():
     while True:
