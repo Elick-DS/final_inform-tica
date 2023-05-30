@@ -44,13 +44,22 @@ def ingresar_equipo_manual(code):
         else:
             print("La marca del equipo no puede estar vacío, no puede contener caracteres especiales. Inténtelo nuevamente.")
     while True:
-        bloque = input("Ingrese el bloque en el que se encuentra el dispositivo: ")
-        piso = input("Ingresa el piso en el que se encuentra el dispositivo: ")
+        while True:
+            bloque = input("Ingrese el bloque en el que se encuentra el dispositivo (1-5): ")
+            if bloque.strip() and bloque.isnumeric() and 1 <= int(bloque) <= 5:
+                break
+            else:
+                print("El bloque debe ser un número entre 1 y 5. Inténtelo nuevamente.")
+
+        while True:
+            piso = input("Ingresa el piso en el que se encuentra el dispositivo (1-10): ")
+            if piso.strip() and piso.isnumeric() and 1 <= int(piso) <= 10:
+                break
+            else:
+                print("El piso debe ser un número entre 1 y 10. Inténtelo nuevamente.")
+
         bp = f"B{bloque}P{piso}"
-        if bp.strip() and bp.isalnum():
-            break
-        else:
-            print("La marca del equipo no puede estar vacío, no puede contener caracteres especiales. Inténtelo nuevamente.")
+        break
     
     print(f"Código del responsable: {code}")
 
