@@ -105,12 +105,14 @@ def ver_equipos():
         Equipos = Equipos_collection.find()
 
         for Equipo in Equipos:
+            print("--------------------------------------------------")
             print("serial:", Equipo["serial"])
             print("numero_activo:", Equipo["numero_activo"])
             print("nombre_equipo:", Equipo["nombre_equipo"])
             print("marca:", Equipo["marca"])
             print("ubicacion:", Equipo["ubicacion"])
             print("codigo_responsable:", Equipo["codigo_responsable"])
+            print("--------------------------------------------------")
 
     except Exception as e:
         print(f"Error al ver los equipos: {str(e)}")

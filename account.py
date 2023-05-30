@@ -130,11 +130,13 @@ def buscar_responsable():
         responsable = responsables_collection.find_one({"codigo_responsable": codigo_responsable})
 
         if responsable:
-            print("codigo_responsable:", responsable["codigo_responsable"])
-            print("nombre:", responsable["nombre"])
-            print("apellido:", responsable["apellido"])
-            print("documento:", responsable["documento"])
-            print("cargo:", responsable["cargo"])
+            print("--------------------------------------------------")
+            print("Codigo responsable:", responsable["codigo_responsable"])
+            print("Nombre:", responsable["nombre"])
+            print("Apellido:", responsable["apellido"])
+            print("Documento:", responsable["documento"])
+            print("Cargo:", responsable["cargo"])
+            print("--------------------------------------------------")
         else:
             print("No se pudo encontrar un responsable con el código proporcionado.")
 
@@ -155,11 +157,13 @@ def ver_responsables():
         responsables = responsables_collection.find()
 
         for responsable in responsables:
-            print("codigo_responsable:", responsable["codigo_responsable"])
-            print("nombre:", responsable["nombre"])
-            print("apellido:", responsable["apellido"])
-            print("documento:", responsable["documento"])
-            print("cargo:", responsable["cargo"])
+            print("--------------------------------------------------")
+            print("Codigo responsable:", responsable["codigo_responsable"])
+            print("Nombre:", responsable["nombre"])
+            print("Apellido:", responsable["apellido"])
+            print("Documento:", responsable["documento"])
+            print("Cargo:", responsable["cargo"])
+            print("--------------------------------------------------")
 
     except Exception as e:
         print(f"Ha ocurrido un error al ver los responsables: {str(e)}")
