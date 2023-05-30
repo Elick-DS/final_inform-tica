@@ -3,6 +3,7 @@ from data_base import ingresar_equipos_automaticamente, ver_equipos, actualizar_
 from account import gestionar_responsables
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from ubicaciones import ingresar_ubicacion, actualizar_ubicacion, ver_ubicaciones, eliminar_ubicacion, buscar_ubicacion
 
 uri = "mongodb+srv://informatica1:bio123@clusterinfo1.vzk1bse.mongodb.net/?retryWrites=true&w=majority"
 
@@ -93,10 +94,7 @@ def eliminar_equipo():
     print(f"Se eliminaron {delete_result.deleted_count} documentos con el número de activo {numero_activo}.")
 
 
-def ingresar_ubicacion():
-    codigo_ubicacion = int(input("Ingrese el código de ubicación: "))
-    nombre_ubicacion = input("Ingrese el nombre de la ubicación: ")
-    piso = int(input("Ingrese el número de piso: "))
+
 
 def menu_principal(code):
     while True:
@@ -155,7 +153,7 @@ def menu_equipos(code):
 
 
 
-def menu_ubicaciones():
+def menu_ubicaciones(code):
     while True:
      print("Menú Ubicaciones")
      print("1. Ingresar nueva ubicación")
@@ -164,8 +162,28 @@ def menu_ubicaciones():
      print("4. Ver información de todas las ubicaciones")
      print("5. Eliminar una ubicación")
      print("6. Volver al menú principal")
-    
+
      opcion = input("Selecciona una opción: ")
+
+     if opcion == "1":
+         ingresar_ubicacion()
+     elif opcion == "2":
+         actualizar_ubicacion()
+     elif opcion == "3":
+         buscar_ubicacion()
+     elif opcion == "4":
+         ver_ubicaciones
+     elif opcion == "5":
+         eliminar_ubicacion
+     elif opcion == "6":
+        break
+     else:
+            print("Error, ingrese una opción válida")
+
+            
+
+    
+
 
 
 
