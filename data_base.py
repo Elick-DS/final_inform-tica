@@ -20,10 +20,10 @@ myres = mydb["responsables"]
 
 
 ultima_posicion = 0
-def ingresar_equipos_automaticamente():
+def ingresar_equipos_automaticamente(code):
     global ultima_posicion
     print("Ingresar Equipo Automáticamente")
-    archivo_csv = "TrabajoFinal_InformaticaUdea-main/InventarioIPS.csv"
+    archivo_csv = "InventarioIPS.csv"
 
     try:
         client = MongoClient(uri, server_api=ServerApi('1'))

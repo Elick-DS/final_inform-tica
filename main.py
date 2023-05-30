@@ -1,3 +1,11 @@
+""" 
+      INFORMÁTICA 1
+
+Elick David Newball Rodriguez
+Juan Felipe Pereira Molina
+
+"""
+
 from functions import menu_principal
 from account import ingresar_responsable
 
@@ -38,10 +46,12 @@ def bienvenida():
 
 
         if opcion == "1":
-            code = input("Ingresa el código de responsable: ")
+            code1 = input("Ingresa el código de responsable: ")
             usuario_encontrado = False
-            for a in myres.find({'codigo_responsable': code}):
+            for a in myres.find({'codigo_responsable': code1}):
+                print("--------------------------------------------------")
                 print(f"BIENVENIDO {a['nombre']} {a['apellido']}")
+                code  = a['nombre']
                 usuario_encontrado = True
                 menu_principal(code)
                 break

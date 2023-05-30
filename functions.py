@@ -20,8 +20,10 @@ except Exception as e:
 mydb = client["informatica1"]
 mycol = mydb["Equipos"]
 myres = mydb["responsables"]
+myubi = mydb["ubicaciones"]
 
 def ingresar_equipo_manual(code):
+    print("--------------------------------------------------")
     while True:
         serial = input("Ingrese el número de serie: ")
         if serial.strip() and serial.isalnum() and len(serial) == 10:
@@ -62,7 +64,8 @@ def ingresar_equipo_manual(code):
         bp = f"B{bloque}P{piso}"
         break
     
-    print(f"Código del responsable: {code}")
+    print(f"Nombre del responsable: {code}")
+    print("--------------------------------------------------")
 
     nuevo_equipo = {"serial": serial,"numero_activo": numero_activo,"nombre_equipo": nombre_equipo,"marca": marca,"ubicacion":bp,"codigo_responsable": code}
 
@@ -148,7 +151,7 @@ def menu_equipos(code):
         if opcion == "1":
             ingresar_equipo_manual(code)
         elif opcion == "2":
-            ingresar_equipos_automaticamente()
+            ingresar_equipos_automaticamente(code)
         elif opcion == "3":
             actualizar_equipo()
         elif opcion == "4":
@@ -166,7 +169,7 @@ def menu_equipos(code):
 
 
 
-def menu_ubicaciones(code):
+def menu_ubicaciones():
     while True:
      print("--------------------------------------------------")
      print("Menú Ubicaciones")
