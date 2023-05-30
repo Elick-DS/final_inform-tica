@@ -116,19 +116,31 @@ def actualizar_responsable():
 
 
 
+
 def buscar_responsable():
-    codigo_responsable = input("Ingrese el código del responsable que se desea buscar: ")
-    usuario_encontrado = False
-    for y in myres.find({'codigo_responsable': codigo_responsable}):          
-        print(f"---------------------------------------------")
-        print(f"codigo_responsable:", y["codigo_responsable"])
-        print(f"nombre:", y["nombre"])
-        print(f"apellido:", y["apellido"])
-        print(f"documento:", y["documento"])
-        print(f"cargo:", y["cargo"])
-        print(f"---------------------------------------------")
-    if not usuario_encontrado:
-            print("No ha sido posible encontrar el código del responsable .")
+    print("Buscar Responsable")
+
+    try:
+        codigo_responsable = input("Ingrese el código del responsable a buscar: ")
+
+        client = MongoClient(uri, server_api=ServerApi('1'))
+        db = client.informatica1
+        responsables_collection = db.responsables
+
+        responsable = responsables_collection.find_one({"codigo_responsable": codigo_responsable})
+
+        if responsable:
+            print("codigo_responsable:", responsable["codigo_responsable"])
+            print("nombre:", responsable["nombre"])
+            print("apellido:", responsable["apellido"])
+            print("documento:", responsable["documento"])
+            print("cargo:", responsable["cargo"])
+        else:
+            print("No se pudo encontrar un responsable con el código proporcionado.")
+
+    except Exception as e:
+        print(f"Error al buscar el responsable: {str(e)}")
+
 
 
 
