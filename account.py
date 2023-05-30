@@ -98,14 +98,14 @@ def actualizar_responsable():
     if responsable:
         nombre = str(input("Nombre nuevo: "))
         apellido = str(input("Apellido nuevo: "))
-        documento_identidad = input("Número de documento de identidad nuevo: ")
+        documento= input("Documento nuevo: ")
         cargo = str(input("Cargo nuevo: "))
 
         nuevo_responsable ={
             "$set": {
                 "nombre": nombre,
                 "apellido": apellido,
-                "documento": documento_identidad,
+                "documento": documento,
                 "cargo": cargo
             }}
 
