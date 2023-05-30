@@ -121,11 +121,11 @@ def buscar_responsable():
     usuario_encontrado = False
     for y in myres.find({'codigo_responsable': codigo_responsable}):          
         print(f"---------------------------------------------")
-        print(f"Código responsable:", y["codigo_responsable"])
-        print(f"Nombre:", y["nombre"])
-        print(f"Apellido:", y["apellido"])
-        print(f"Número de documento de identidad:", y["documento"])
-        print(f"Cargo:", y["cargo"])
+        print(f"codigo_responsable:", y["codigo_responsable"])
+        print(f"nombre:", y["nombre"])
+        print(f"apellido:", y["apellido"])
+        print(f"documento:", y["documento"])
+        print(f"cargo:", y["cargo"])
         print(f"---------------------------------------------")
     if not usuario_encontrado:
             print("No ha sido posible encontrar el código del responsable .")
@@ -143,12 +143,11 @@ def ver_responsables():
         responsables = responsables_collection.find()
 
         for responsable in responsables:
-            print("---")
-            print("Código responsable:", responsable["Código responsable"])
-            print("Nombre:", responsable["Nombre"])
-            print("Apellido:", responsable["Apellido"])
-            print("Número de documento de identidad:", responsable["Número de documento de identidad"])
-            print("Cargo:", responsable["Cargo"])
+            print("codigo_responsable:", responsable["codigo_responsable"])
+            print("nombre:", responsable["nombre"])
+            print("apellido:", responsable["apellido"])
+            print("documento:", responsable["documento"])
+            print("cargo:", responsable["cargo"])
 
     except Exception as e:
         print(f"Ha ocurrido un error al ver los responsables: {str(e)}")
