@@ -1,3 +1,11 @@
+""" 
+      INFORMÁTICA 1
+
+Elick David Newball Rodriguez
+Juan Felipe Pereira Molina
+
+"""
+
 from functions import menu_principal
 from account import ingresar_responsable
 
@@ -13,7 +21,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    print("CARGANDO.....")
 except Exception as e:
     print(e)
 
@@ -22,11 +30,14 @@ myres = mydb["responsables"]
 
 
 def bienvenida():
+    print("--------------------------------------------------")
     print("BIENVENIDO A NUESTRO SISTEMA DE CONTROL DE INVENTARIOS MÉDICOS")
 
     while True:
         while True:
+            print("--------------------------------------------------")
             opcion = input("1.Iniciar sesión\n2.Crearse una cuenta\n3.Salir\nOpción:")
+            print("--------------------------------------------------")
             if opcion.isnumeric() and opcion == "1":
                 break
             elif opcion.isnumeric() and opcion == "2":
@@ -38,15 +49,16 @@ def bienvenida():
 
 
         if opcion == "1":
-            code = input("Ingresa el código de responsable: ")
+            code1 = input("Ingresa el código de responsable: ")
             usuario_encontrado = False
             for a in myres.find({'codigo_responsable': code}):
-                print(f"Usuario {a['nombre']}")
+                print(f"BIENVENIDO {a['nombre']} {a['apellido']}")
                 usuario_encontrado = True
                 menu_principal(code)
                 break
             
             if not usuario_encontrado:
+                print("--------------------------------------------------")
                 print("El código de responsable no se encuentra en la base de datos, creese una cuenta o verifique que ha escrito bien su código.")
 
 

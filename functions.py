@@ -13,28 +13,16 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    print("CARGANDO....")
 except Exception as e:
     print(e)
 
 mydb = client["informatica1"]
 mycol = mydb["Equipos"]
 myres = mydb["responsables"]
+myubi = mydb["ubicaciones"]
 
-
-
-def ingresar_equipo_manual(code): 
-    """
-    Permite ingresar manualmente la información de un equipo y almacenarlo en la base de datos MongoDB.
-
-    Solicita al usuario ingresar el número de serie, genera un número de activo aleatorio, solicita el nombre y marca del equipo,
-    solicita el bloque y piso de ubicación del dispositivo, y finalmente recibe el código del responsable. Luego, crea un documento
-    con la información ingresada y lo inserta en la colección `mycol` de la base de datos.
-
-    Parámetros:
-    - code (str): Código del responsable del equipo.
-
-    """
+def ingresar_equipo_manual(code):
     while True:
         serial = input("Ingrese el número de serie: ")
         if serial.strip() and serial.isalnum() and len(serial) == 10:
@@ -75,7 +63,8 @@ def ingresar_equipo_manual(code):
         bp = f"B{bloque}P{piso}"
         break
     
-    print(f"Código del responsable: {code}")
+    print(f"Nombre del responsable: {code}")
+    print("--------------------------------------------------")
 
     nuevo_equipo = {"serial": serial,"numero_activo": numero_activo,"nombre_equipo": nombre_equipo,"marca": marca,"ubicacion":bp,"codigo_responsable": code}
 
@@ -141,7 +130,9 @@ def eliminar_equipo():
         else:
             print("El número de activo no puede estar vacío, no puede contener caracteres especiales y no puede tener más de 4 caracteres. Inténtelo nuevamente.")
     delete_result = mycol.delete_many({"numero_activo": numero_activo})
+    print("--------------------------------------------------")
     print(f"Se eliminaron {delete_result.deleted_count} documentos con el número de activo {numero_activo}.")
+    print("--------------------------------------------------")
 
 # help(eliminar_equipo)
 
@@ -165,7 +156,7 @@ def menu_principal(code):
         elif opcion == "2":
             gestionar_responsables()
         elif opcion == "3":
-            menu_ubicaciones(code)
+            menu_ubicaciones()
         elif opcion == "4":
             print("¡Gracias por utilizar el sistema!")
             exit()
@@ -191,7 +182,7 @@ def menu_equipos(code):
         if opcion == "1":
             ingresar_equipo_manual(code)
         elif opcion == "2":
-            ingresar_equipos_automaticamente()
+            ingresar_equipos_automaticamente(code)
         elif opcion == "3":
             actualizar_equipo()
         elif opcion == "4":
