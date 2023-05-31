@@ -20,6 +20,16 @@ myres = mydb["responsables"]
 myubi = mydb["ubicaciones"]
 
 def ingresar_ubicacion():
+    """
+    Permite ingresar una nueva ubicación en la base de datos MongoDB.
+
+    Establece la conexión con la base de datos, accede a la colección de ubicaciones y solicita al usuario ingresar
+    el código de ubicación, el nombre de la ubicación, el bloque y piso donde se encuentra, y el teléfono de la ubicación.
+    Se validan los valores ingresados para el bloque y el piso, asegurando que sean números entre 1 y 5 para el bloque
+    y entre 1 y 10 para el piso. Luego, se crea un documento de ubicación con los datos ingresados y se inserta en la
+    colección de ubicaciones.
+
+    """
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client.informatica1
     ubicaciones_collection = db.ubicaciones  
@@ -58,8 +68,23 @@ def ingresar_ubicacion():
     except Exception as e:
         print(f"Ha ocurrido un error al ingresar la ubicación: {str(e)}")
 
+# help(ingresar_ubicacion)
+
+
+
 
 def actualizar_ubicacion():
+    """
+    Permite actualizar los datos de una ubicación existente en la base de datos MongoDB.
+
+    Establece la conexión con la base de datos, accede a la colección de ubicaciones y solicita al usuario ingresar
+    el código de ubicación que se desea actualizar. Luego, solicita ingresar el nuevo nombre de la ubicación, el bloque
+    y piso actualizados donde se encuentra, y el nuevo teléfono de la ubicación. Se validan los valores ingresados para
+    el bloque y el piso, asegurando que sean números entre 1 y 5 para el bloque y entre 1 y 10 para el piso. A continuación,
+    se utiliza el método `update_one` para buscar el documento de ubicación correspondiente al código ingresado y se
+    actualizan los campos de nombre, bloque, piso y teléfono con los nuevos valores proporcionados.
+
+    """
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client.informatica1
     ubicaciones_collection = db.ubicaciones  
@@ -94,9 +119,22 @@ def actualizar_ubicacion():
     except Exception as e:
         print(f"Ha ocurrido un error al actualizar la ubicación: {str(e)}")
 
+    # help(actualizar_ubicacion)
+
+
 
 
 def buscar_ubicacion():
+    """
+    Permite buscar una ubicación en la base de datos MongoDB utilizando su código.
+
+    Establece la conexión con la base de datos, accede a la colección de ubicaciones y solicita al usuario ingresar
+    el código de ubicación que se desea buscar. A continuación, utiliza el método `find_one` para buscar el documento
+    de ubicación correspondiente al código ingresado. Si se encuentra la ubicación, se imprime su código, nombre,
+    ubicación física (bloque y piso) y teléfono. Si no se encuentra ninguna ubicación con el código proporcionado,
+    se muestra un mensaje indicando que no se pudo encontrar ninguna ubicación.
+
+    """
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client.informatica1
     ubicaciones_collection = db.ubicaciones  
@@ -116,10 +154,20 @@ def buscar_ubicacion():
     else:
         print("No se pudo encontrar ninguna ubicación con el código brindado.")
 
+    # help(buscar_ubicacion)
+
 
 
 
 def ver_ubicaciones():
+    """
+    Muestra en pantalla todas las ubicaciones almacenadas en la base de datos MongoDB.
+
+    Establece la conexión con la base de datos, accede a la colección de ubicaciones y utiliza el método `find`
+    para obtener todos los documentos de ubicación. Luego, recorre cada ubicación e imprime en pantalla su código,
+    nombre, bloque y piso, y teléfono.
+
+    """
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client.informatica1
     ubicaciones_collection = db.ubicaciones  
@@ -130,16 +178,26 @@ def ver_ubicaciones():
     for ubicacion in ubicaciones:
         print("--------------------------------------------------")
         print("codigo:", ubicacion["codigo"])
-        print("nombre:", ubicacion["nombre"])
+        print("nombre:", ubicacion["nombre"])   
         print("Bloque y piso", ubicacion["bp"])
         print("telefono:", ubicacion["telefono"])
         print("--------------------------------------------------")
+
+    # help(ver_ubicaciones)
         
 
 
 
 
 def eliminar_ubicacion():
+    """
+    Permite eliminar una ubicación de la base de datos MongoDB utilizando su código.
+
+    Establece la conexión con la base de datos, accede a la colección de ubicaciones y solicita al usuario ingresar
+    el código de ubicación que se desea eliminar. A continuación, utiliza el método `delete_one` para eliminar el
+    documento de ubicación correspondiente al código ingresado.
+
+    """
     
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client.informatica1
@@ -154,6 +212,8 @@ def eliminar_ubicacion():
         print("--------------------------------------------------")
     except Exception as e:
         print(f"Ha ocurrido un error al eliminar la ubicación: {str(e)}")
+
+    # help(eliminar_ubicacion)
 
 
 

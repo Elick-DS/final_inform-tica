@@ -19,8 +19,20 @@ mycol = mydb["Equipos"]
 myres = mydb["responsables"]
 
 
+
 ultima_posicion = 0
 def ingresar_equipos_automaticamente():
+    """
+    Ingresa equipos automáticamente a la base de datos de MongoDB a partir de un archivo CSV.
+
+    Lee el archivo CSV especificado y utiliza DictReader para iterar sobre las filas del archivo.
+    Utiliza la variable 'ultima_posicion' para determinar en qué posición comenzar la lectura del archivo.
+    Luego, se obtiene el siguiente equipo del archivo CSV y se crea un documento con los datos correspondientes.
+    El documento se inserta en la colección de equipos de la base de datos.
+    Después de cada inserción exitosa, se actualiza la variable 'ultima_posicion' para indicar la posición
+    del último equipo ingresado.
+
+    """
     global ultima_posicion
     print("Ingresar Equipo Automáticamente")
     archivo_csv = "TrabajoFinal_InformaticaUdea-main/InventarioIPS.csv"
@@ -62,9 +74,21 @@ def ingresar_equipos_automaticamente():
     except Exception as e:
         print(f"Error al ingresar equipo automáticamente: {str(e)}")
 
+    # help(ingresar_equipos_automaticamente)
+
 
 
 def actualizar_equipo():
+     """
+    Actualiza la información de un equipo en la base de datos MongoDB.
+
+    El usuario debe ingresar el número de activo del equipo que desea actualizar.
+    Se verifica si el equipo existe en la base de datos. Si se encuentra, se solicita al usuario
+    ingresar el nuevo nombre y marca del equipo, así como el bloque y piso de ubicación.
+    Después de validar la información ingresada, se crea un diccionario con los nuevos valores
+    y se utiliza la función 'update_one' para actualizar el equipo en la base de datos.
+
+    """
      numero_activo = input("Ingrese el número de activo del equipo a actualizar: ")
  
      equipo = mycol.find_one({"numero_activo": numero_activo})
@@ -93,8 +117,20 @@ def actualizar_equipo():
      else:
          print("No se encontro el equipo.")
 
+# help(actualizar_equipo)
+
+
 
 def ver_equipos():
+    """
+    Muestra la información de todos los equipos almacenados en la base de datos MongoDB.
+
+    Establece la conexión con la base de datos, accede a la colección de equipos y realiza una consulta
+    para obtener todos los documentos de la colección. Luego, itera sobre los equipos encontrados
+    e imprime su información, incluyendo el serial, número de activo, nombre del equipo, marca,
+    ubicación y código del responsable.
+
+    """
     print("Ver Equipos")
 
     try:
@@ -117,6 +153,7 @@ def ver_equipos():
     except Exception as e:
         print(f"Error al ver los equipos: {str(e)}")
 
+# help(ver_equipos)
 
 
 

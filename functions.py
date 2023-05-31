@@ -21,7 +21,20 @@ mydb = client["informatica1"]
 mycol = mydb["Equipos"]
 myres = mydb["responsables"]
 
-def ingresar_equipo_manual(code):
+
+
+def ingresar_equipo_manual(code): 
+    """
+    Permite ingresar manualmente la información de un equipo y almacenarlo en la base de datos MongoDB.
+
+    Solicita al usuario ingresar el número de serie, genera un número de activo aleatorio, solicita el nombre y marca del equipo,
+    solicita el bloque y piso de ubicación del dispositivo, y finalmente recibe el código del responsable. Luego, crea un documento
+    con la información ingresada y lo inserta en la colección `mycol` de la base de datos.
+
+    Parámetros:
+    - code (str): Código del responsable del equipo.
+
+    """
     while True:
         serial = input("Ingrese el número de serie: ")
         if serial.strip() and serial.isalnum() and len(serial) == 10:
@@ -69,7 +82,21 @@ def ingresar_equipo_manual(code):
     x=mycol.insert_one(nuevo_equipo)
     print(x.inserted_id)
 
+
+    # help(ingresar_equipo_manual)
+
+
+
 def buscar_equipo():
+    """
+    Permite buscar un equipo en la base de datos MongoDB utilizando el número de activo como criterio de búsqueda.
+
+    Solicita al usuario ingresar el número de activo y luego realiza una consulta en la colección `mycol` para encontrar
+    los equipos que coincidan con ese número. Si se encuentran equipos, se imprime la información detallada de cada uno,
+    incluyendo el número de serie, número de activo, nombre del equipo, ubicación, marca y código del responsable. Si no
+    se encuentra ningún equipo, se muestra un mensaje de error.
+
+    """
     code = input("Ingresa el número de activo: ")
     equipos_encontrados = 0
     
@@ -92,7 +119,21 @@ def buscar_equipo():
     if equipos_encontrados == 0:
         print("Error, no se encontró ningún equipo.")
 
+    # help(buscar_equipo)
+
+
+
+
+
+
 def eliminar_equipo():
+    """
+    Permite eliminar un equipo de la base de datos MongoDB utilizando el número de activo como criterio de eliminación.
+
+    Solicita al usuario ingresar el número de activo y luego realiza una operación de eliminación en la colección `mycol`
+    para eliminar los documentos que coincidan con ese número. Luego muestra la cantidad de documentos eliminados.
+
+    """
     while True:
         numero_activo = input("Ingrese el número de activo: ")
         if numero_activo.strip() and numero_activo.isnumeric() and len(numero_activo) == 4:
@@ -101,6 +142,8 @@ def eliminar_equipo():
             print("El número de activo no puede estar vacío, no puede contener caracteres especiales y no puede tener más de 4 caracteres. Inténtelo nuevamente.")
     delete_result = mycol.delete_many({"numero_activo": numero_activo})
     print(f"Se eliminaron {delete_result.deleted_count} documentos con el número de activo {numero_activo}.")
+
+# help(eliminar_equipo)
 
 
 
@@ -166,7 +209,7 @@ def menu_equipos(code):
 
 
 
-def menu_ubicaciones(code):
+def menu_ubicaciones():
     while True:
      print("--------------------------------------------------")
      print("Menú Ubicaciones")
