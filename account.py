@@ -140,6 +140,24 @@ def ingresar_responsable():
 
 
 def actualizar_responsable():
+    """
+    Actualiza la información de un responsable en la base de datos.
+
+    El usuario debe ingresar el código del responsable que se desea actualizar.
+    Si el responsable se encuentra en la base de datos, se le solicita ingresar
+    los nuevos valores para nombre, apellido, documento y cargo. Luego, se actualiza
+    la información del responsable en la base de datos.
+
+    Ejemplo:
+    >>> actualizar_responsable()
+    Actualizar Responsable
+    Ingrese el código del responsable que se quiere actualizar: 12345
+    Nombre nuevo: Pedro
+    Apellido nuevo: Piedra
+    Documento nuevo: 987654321
+    Cargo nuevo: Auxiliar
+    El Responsable ha sido actualizado de forma satisfactoria.
+    """
     print("Actualizar Responsable ")
     print("--------------------------------------------------")
 
@@ -175,6 +193,26 @@ def actualizar_responsable():
 
 
 def buscar_responsable():
+    """
+    Busca un responsable en la base de datos de MongoDB utilizando su código de responsable.
+
+    Solicita al usuario ingresar el código del responsable a buscar. Realiza la búsqueda en la
+    base de datos y muestra la información del responsable si se encuentra. Si no se encuentra
+    ningún responsable con el código proporcionado, se muestra un mensaje indicando que no se
+    encontró ningún responsable.
+
+    Ejemplo de uso:
+    >> buscar_responsable()
+    Ingrese el código del responsable a buscar: 12345
+    --------------------------------------------------
+    Codigo responsable: 12345
+    Nombre: Dora
+    Apellido: Narvaez
+    Documento: 347554327
+    Cargo: Secretaria
+    --------------------------------------------------
+
+    """
     print("Buscar Responsable")
     print("--------------------------------------------------")
 
@@ -209,10 +247,35 @@ def buscar_responsable():
 
 
 def ver_responsables():
-    print("Ver Responsables")
-    print("--------------------------------------------------")
+     """
+    Muestra todos los responsables almacenados en la base de datos de MongoDB.
 
-    try:
+    Realiza una consulta a la colección de responsables en la base de datos y muestra la
+    información de cada responsable. La información mostrada incluye el código de responsable,
+    nombre, apellido, documento y cargo.
+
+    Ejemplo de uso:
+    >> ver_responsables()
+    --------------------------------------------------
+    Codigo responsable: 12345
+    Nombre: Erick
+    Apellido: Parra
+    Documento: 2331320121
+    Cargo: Conserje
+    --------------------------------------------------
+    --------------------------------------------------
+    Codigo responsable: 97892
+    Nombre: Janeth
+    Apellido: Correa
+    Documento: 123456789
+    Cargo: Analista
+    --------------------------------------------------
+
+    """
+     print("Ver Responsables")
+     print("--------------------------------------------------")
+
+     try:
         client = MongoClient(uri, server_api=ServerApi('1'))
         db = client.informatica1
         responsables_collection = db.responsables
@@ -228,7 +291,7 @@ def ver_responsables():
             print("Cargo:", responsable["cargo"])
             print("--------------------------------------------------")
 
-    except Exception as e:
+     except Exception as e:
         print(f"Ha ocurrido un error al ver los responsables: {str(e)}")
 
     # help(ver_responsables)

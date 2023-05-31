@@ -22,6 +22,17 @@ myres = mydb["responsables"]
 
 ultima_posicion = 0
 def ingresar_equipos_automaticamente():
+    """
+    Ingresa equipos automáticamente a la base de datos de MongoDB a partir de un archivo CSV.
+
+    Lee el archivo CSV especificado y utiliza DictReader para iterar sobre las filas del archivo.
+    Utiliza la variable 'ultima_posicion' para determinar en qué posición comenzar la lectura del archivo.
+    Luego, se obtiene el siguiente equipo del archivo CSV y se crea un documento con los datos correspondientes.
+    El documento se inserta en la colección de equipos de la base de datos.
+    Después de cada inserción exitosa, se actualiza la variable 'ultima_posicion' para indicar la posición
+    del último equipo ingresado.
+
+    """
     global ultima_posicion
     print("Ingresar Equipo Automáticamente")
     archivo_csv = "InventarioIPS.csv"
@@ -68,10 +79,20 @@ def ingresar_equipos_automaticamente():
 
 
 def actualizar_equipo():
-     numero_activo = input("Ingrese el número de activo del equipo a actualizar: ")
-     print("--------------------------------------------------")
-     equipo = mycol.find_one({"numero_activo": numero_activo})
-     if equipo:
+    """
+    Actualiza la información de un equipo en la base de datos MongoDB.
+
+    El usuario debe ingresar el número de activo del equipo que desea actualizar.
+    Se verifica si el equipo existe en la base de datos. Si se encuentra, se solicita al usuario
+    ingresar el nuevo nombre y marca del equipo, así como el bloque y piso de ubicación.
+    Después de validar la información ingresada, se crea un diccionario con los nuevos valores
+    y se utiliza la función 'update_one' para actualizar el equipo en la base de datos.
+
+    """
+    numero_activo = input("Ingrese el número de activo del equipo a actualizar: ")
+    print("--------------------------------------------------")
+    equipo = mycol.find_one({"numero_activo": numero_activo})
+    if equipo:
          print("--------------------------------------------------")
          nuevo_nombre = input("Ingrese el nuevo nombre del equipo: ")
          nuevo_marca = input("Ingrese la nueva marca: ")
@@ -94,7 +115,7 @@ def actualizar_equipo():
      
          mycol.update_one({"numero_activo": numero_activo}, nuevo_equipo)
          print("Equipo actualizado satisfactoriamente.")
-     else:
+    else:
          print("No se encontro el equipo.")
 
 # help(actualizar_equipo)
@@ -102,10 +123,19 @@ def actualizar_equipo():
 
 
 def ver_equipos():
-    print("Ver Equipos")
-    print("--------------------------------------------------")
+     """
+    Muestra la información de todos los equipos almacenados en la base de datos MongoDB.
 
-    try:
+    Establece la conexión con la base de datos, accede a la colección de equipos y realiza una consulta
+    para obtener todos los documentos de la colección. Luego, itera sobre los equipos encontrados
+    e imprime su información, incluyendo el serial, número de activo, nombre del equipo, marca,
+    ubicación y código del responsable.
+
+    """
+     print("Ver Equipos")
+     print("--------------------------------------------------")
+
+     try:
         client = MongoClient(uri, server_api=ServerApi('1'))
         db = client.informatica1
         Equipos_collection = db.Equipos
@@ -122,7 +152,7 @@ def ver_equipos():
             print("codigo_responsable:", Equipo["codigo_responsable"])
             print("--------------------------------------------------")
 
-    except Exception as e:
+     except Exception as e:
         print(f"Error al ver los equipos: {str(e)}")
 
 # help(ver_equipos)
