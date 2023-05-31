@@ -23,6 +23,7 @@ myres = mydb["responsables"]
 myubi = mydb["ubicaciones"]
 
 def ingresar_equipo_manual(code):
+    print("--------------------------------------------------")
     while True:
         serial = input("Ingrese el número de serie: ")
         if serial.strip() and serial.isalnum() and len(serial) == 10:
@@ -182,7 +183,7 @@ def menu_equipos(code):
         if opcion == "1":
             ingresar_equipo_manual(code)
         elif opcion == "2":
-            ingresar_equipos_automaticamente(code)
+            ingresar_equipos_automaticamente()
         elif opcion == "3":
             actualizar_equipo()
         elif opcion == "4":

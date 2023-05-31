@@ -52,6 +52,7 @@ def bienvenida():
             code1 = input("Ingresa el código de responsable: ")
             usuario_encontrado = False
             for a in myres.find({'codigo_responsable': code1}):
+                print("--------------------------------------------------")
                 print(f"BIENVENIDO {a['nombre']} {a['apellido']}")
                 code = a['nombre']
                 usuario_encontrado = True
