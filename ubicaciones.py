@@ -55,11 +55,12 @@ def ingresar_ubicacion():
     
     while True:
         telefono = input("Ingresa el teléfono de la ubicación: ")
-        if telefono.strip() and telefono.isalnum() and 8 <= int(piso) <= 10:
+        if telefono.strip() and telefono.isnumeric() and 8 <= len(telefono) <= 10:
             break
         else:
             print("--------------------------------------------------")
-            print("El número de teléfono no puede estar vacío, no puede contener caracteres especiales y no puede tener menos de 8 o más de 10 caracteres. Inténtelo nuevamente.")
+        print("El número de teléfono no puede estar vacío, no puede contener caracteres especiales y debe tener entre 8 y 10 caracteres. Inténtelo nuevamente.")
+
     print("--------------------------------------------------")
     
     ubicacion = {
@@ -86,7 +87,13 @@ def actualizar_ubicacion():
     ubicaciones_collection = db.ubicaciones  
     print("--------------------------------------------------")
     codigo = input("Ingresa el código de ubicación a actualizar: ")
-    nombre = input("Ingresa el nuevo nombre de la ubicación: ")
+    
+    while True:
+        nombre = input("Ingresa el nuevo nombre de la ubicación: ")
+        if nombre.strip() and nombre.isalpha():
+            break
+        else:
+            print("El nombre de la ubicación no puede estar vacío y no puede contener caracteres especiales. Inténtelo nuevamente.")
     while True:
         while True:
             bloque = input("Ingrese el bloque en el que se encuentra el dispositivo (1-5): ")
@@ -104,7 +111,13 @@ def actualizar_ubicacion():
 
         bp = f"B{bloque}P{piso}"
         break
-    telefono = input("Ingresa el nuevo teléfono de la ubicación: ")
+    while True:
+        telefono = input("Ingresa el teléfono de la ubicación: ")
+        if telefono.strip() and telefono.isnumeric() and 8 <= int(piso) <= 10:
+            break
+        else:
+            print("--------------------------------------------------")
+            print("El número de teléfono no puede estar vacío, no puede contener caracteres especiales y no puede tener menos de 8 o más de 10 caracteres. Inténtelo nuevamente.")
     print("--------------------------------------------------")
     
     try:
@@ -133,9 +146,9 @@ def buscar_ubicacion():
     if ubicacion:
         print("--------------------------------------------------")
         print("Ubicación encontrada:")
-        print("codigo:", ubicacion["codigo"])
-        print("nombre:", ubicacion["nombre"])
-        print("bp:", ubicacion["bp"])
+        print("Codigo:", ubicacion["codigo"])
+        print("Nombre:", ubicacion["nombre"])
+        print("Bloque y piso:", ubicacion["bp"])
         print("telefono:", ubicacion["telefono"])
         print("--------------------------------------------------")
     else:
@@ -158,7 +171,7 @@ def ver_ubicaciones():
         print("--------------------------------------------------")
         print("codigo:", ubicacion["codigo"])
         print("nombre:", ubicacion["nombre"])
-        print("Bloque y piso", ubicacion["bp"])
+        print("Bloque y piso:", ubicacion["bp"])
         print("telefono:", ubicacion["telefono"])
         print("--------------------------------------------------")
         
